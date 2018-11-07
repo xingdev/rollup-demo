@@ -13335,7 +13335,7 @@
 
   var node = document.querySelector("#app");
   reactDom.render(react.createElement(HelloMessage, {
-    name: "Rollup!!!"
+    name: "Rollup"
   }), node);
 
 }());

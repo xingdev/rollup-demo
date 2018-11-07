@@ -10,4 +10,4 @@ class HelloMessage extends React.Component {
 }
 const node = document.querySelector("#app");
 
-ReactDOM.render(<HelloMessage name="Rollup!!!" />, node);
+ReactDOM.render(<HelloMessage name="Rollup" />, node);
