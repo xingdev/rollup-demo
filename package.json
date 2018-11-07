@@ -1,0 +1,23 @@
+{
+  "name": "rollup-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingdev/rollup-demo.git"
+  },
+  "keywords": [],
+  "author": "starbo <xingbo0227@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xingdev/rollup-demo/issues"
+  },
+  "homepage": "https://github.com/xingdev/rollup-demo#readme",
+  "devDependencies": {
+    "rollup-plugin-commonjs": "^9.2.0"
+  }
+}
