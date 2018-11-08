@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "react-dom": "^16.6.1",
+    "rollup": "^0.67.0"
   }
 }

@@ -228,14 +228,30 @@ function test(ele) {
  
  ##使用教程
  > 使用 npm install --global rollup 进行安装  
- > 通过命令行调用  
- > 通过 JavaScript API来调用  
+ > 通过命令行调用   
  
 ```js
 npm install rollup -g
 
 rollup main.js --file ./distR/bundle-iife.js --format iife --name zxb
-rollup main.js --file ./distR/bundle-cjs.js --format cjs --name zxb
+rollup main.js --file ./distR/bundle-cjs.js --format cjs
+rollup main.js --file ./distR/bundle-umd.js --format umd --name zxb
+
+rollup main-require.js --file ./distR/bundle-require-iife.js --output.format iife --output.name zxb
+
+rollup main-require.js -c --file ./distR/bundle-require-iife-1.js --output.format iife --output.name zxb
+
+rollup main-require.js -c --file ./distR/bundle-require-umd.js --output.format umd --output.name zxb
+
+```
+
+ > 通过 JavaScript API来调用 
+ 
+ ```js
+npm install rollup -g
+
+rollup main.js --file ./distR/bundle-iife.js --format iife --name zxb
+rollup main.js --file ./distR/bundle-cjs.js --format cjs
 rollup main.js --file ./distR/bundle-umd.js --format umd --name zxb
 
 rollup main-require.js --file ./distR/bundle-require-iife.js --output.format iife --output.name zxb
@@ -266,6 +282,8 @@ npm install @babel/core @babel/plugin-external-helpers @babel/preset-env @babel/
 
 plugin  
 
+
+rollup-plugin-node-resolve 
 
 
 

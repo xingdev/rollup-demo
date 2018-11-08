@@ -9,21 +9,14 @@ var zxb = (function () {
     return a - b;
   }
 
-  const math = {
+  var mathRequire = {
     add,
     minus
   };
-  var module$1 = math;
 
-  var mathRequire = {
-  	module: module$1
-  };
+  const result = mathRequire.add(1, 2);
 
-  console.log(mathRequire);
-
-  var mainRequire = {
-
-  };
+  var mainRequire = result;
 
   return mainRequire;
 
