@@ -1,10 +1,16 @@
 #rollup.js
 
-> Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码.Rollup 对代码模块使用新的标准化格式，这些标准都包含在 JavaScript 的 ES6 版本中，而不是以前的特殊解决方案，如 CommonJS 和 AMD.ES6 模块可以使你自由、无缝地使用你最喜爱的 library 中那些最有用独立函数，而你的项目不必携带其他未使用的代码
+> Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码.  
+> 
+> Rollup 对代码模块使用ES6标准化格式.
+> 
+> Rollup使项目不必携带其他未使用的代码.
 
-##JS 模块标准
+##JS 模块化规范
+>
 
 ###IIFE
+> 自执行函数，可通过 \<script\> 标签加载
 
 ```js
 var counter = (function() {
@@ -21,23 +27,22 @@ var counter = (function() {
     }
   };
 })();
-counter.get(); //0
-counter.set(3);
-counter.increment(); //4
-counter.increment(); //5
 
-conuter.i; //undefined (`i` is not a property of the returned object)
-i; //ReferenceError: i is not defined (it only exists inside the closure)
 ```
 
 ###common.js
 
-> Node 默认的模块规范, 可通过 Webpack 加载
+> Node 默认的模块规范, 可通过 Webpack 加载  
+> 
+> 认为每个文件就是一个模块，通过exports导出  
 
 ```js
 exports.foo = "bar";
 module.exports = { foo: "bar" };
 const util = require("foo");
+
+exports = module.exports = { foo: "bar" };
+
 ```
 
 - tips:
@@ -50,20 +55,21 @@ const util = require("foo");
 
 - 优点：
    <ol>
-   <li>所有代码都运行在模块作用域，不会污染全局作用域；</li>
-   <li>独立性是模块的重要特点就，模块内部最好不与程序的其他部分直接交互；</li>
-   <li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存；</li>
-    <li>模块加载的顺序，按照其在代码中出现的顺序。
-  node推广了commonJS规范，但是在浏览器中又出现了很多问题</li>
+  <li>所有代码都运行在模块作用域，不会污染全局作用域；</li>
+  <li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存；</li>
+
    </ol>
 - 缺点
   <ol>
     <li>浏览器不支持</li>
   </ol>
+  
+- 思考🤔  为什么要有exports?
 
 ### AMD（Asynchronous Module Definition）和 require.js
 
-> 浏览器端的模块规范, 可通过 RequireJS 可加载
+> 浏览器端的模块规范, 可通过 RequireJS 可加载  
+> 实现了异步加载不会阻塞浏览器
 
 ```js
 /** 网页中引入require.js及main.js **/
@@ -157,6 +163,8 @@ seajs.use(["math.js"], function(math) {
   var sum = math.add(1 + 2);
 });
 ```
+
+
 ###UMD
 > 兼容 IIFE, AMD, CJS 三种模块规范
 
@@ -217,30 +225,18 @@ function test(ele) {
 - 运行时加载: CommonJS 模块就是对象；即在输入时是先加载整个模块，生成一个对象，然后再从这个对象上面读取方法，这种加载称为“运行时加载”。  
 - 编译时加载: ES6 模块不是对象，而是通过 export 命令显式指定输出的代码，import时采用静态命令的形式。即在import时可以指定加载某个输出值，而不是加载整个模块，这种加载称为“编译时加载”。
  </ol>
-
-##为什么选择 Rollup
-   <ol>
-   <li>Tree Shaking: 自动移除未使用的代码, 输出更小的文件</li>
-   <li>Scope Hoisting: 所有模块构建在一个函数内, 执行效率更高</li>
-   <li>Config 文件支持通过 ESM 模块格式书写</li>
-   <li>文档精简</li>  
-   <li>可以一次输出多种格式:</li>  
-   
-   - 不用的模块规范: IIFE, AMD, CJS, UMD, ESM
-   - Development 与 production 版本: .js, .min.js  
-   
-
-   </ol>
-##使用教程
-
+ 
+ ##使用教程
+ > 使用 npm install --global rollup 进行安装  
+ > 通过命令行调用  
+ > 通过 JavaScript API来调用  
+ 
 ```js
 npm install rollup -g
-rollup main.js --file ./distR/bundle-iife.js --format iife
-rollup main.js --file ./distR/bundle-cjs.js --format cjs
 
-rollup main.js --file ./distR/bundle-umd-1.js --format umd
-
-rollup main.js --file ./distR/bundle-umd.js --format umd --name "zxb"
+rollup main.js --file ./distR/bundle-iife.js --format iife --name zxb
+rollup main.js --file ./distR/bundle-cjs.js --format cjs --name zxb
+rollup main.js --file ./distR/bundle-umd.js --format umd --name zxb
 
 rollup main-require.js --file ./distR/bundle-require-iife.js --output.format iife --output.name zxb
 
@@ -260,12 +256,34 @@ rollup main-require.js --file ./distR/bundle-require-iife.js --output.format iif
 ```
 
 
-react-demo  
+react-demo   
+
 ```js
 npm install rollup-plugin-node-resolve rollup-plugin-babel rollup-plugin-node-globals rollup-plugin-postcss -D
 
 npm install @babel/core @babel/plugin-external-helpers @babel/preset-env @babel/preset-react -D
 ```
+
+plugin  
+
+
+
+
+
+##为什么选择 Rollup
+   <ol>
+   <li>Tree Shaking: 自动移除未使用的代码, 输出更小的文件</li>
+   <li>Scope Hoisting: 所有模块构建在一个函数内, 执行效率更高</li>
+   <li>Config 文件支持通过 ESM 模块格式书写</li>
+   <li>文档精简</li>  
+   <li>可以一次输出多种格式:</li>  
+   
+   - 不用的模块规范: IIFE, AMD, CJS, UMD, ESM
+   - Development 与 production 版本: .js, .min.js  
+   
+
+   </ol>
+
 #Webpack 打包模式
 
 

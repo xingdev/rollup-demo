@@ -1,15 +1,12 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (factory());
+  (global.zxb = factory());
 }(this, (function () { 'use strict';
 
-  const add = function(a, b) {
-    return a + b;
-  };
+  function main() {
+  }
 
-  const result = add(1, 2);
-
-  console.log(result);
+  return main;
 
 })));

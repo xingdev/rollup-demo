@@ -6,8 +6,7 @@ function minus(a, b) {
   return a - b;
 }
 
-const math = {
+module.exports = {
   add,
   minus
 };
-exports.module = math;
